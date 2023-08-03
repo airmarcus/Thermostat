@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thermostat</title>
+</head>
+<body>
+    <table>
+    {% for key, value in tstat1.items() %}
+        <tr>
+        <td>{{ key }}</td><td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <form action = "/newhold" method = "POST">
+         <p><h3>Set temperature</h3></p>
+         <p><input type = 'text' name = 'setpoint1'/></p>
+        <p><input type = 'text' name = 'setpoint2'/></p>
+         <p><input type = 'submit' value = 'Set'/></p>
+      </form>
+    <table>
+    {% for key, value in tstat2.items() %}
+        <tr>
+        <td>{{ key }}</td><td>{{ value }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+</body>
+</html>
