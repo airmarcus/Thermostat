@@ -68,6 +68,7 @@ def record_fan():
                     tstat = requests.get(g_url)
                 except:
                     pass
+                if type(tstat) == dict: continue
                 tstat = tstat.json()
                 fstate = tstat['fstate']
                 current_datetime = datetime.now()
