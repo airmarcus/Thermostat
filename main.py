@@ -77,7 +77,7 @@ def record_fan():
                 file_path = "fan_record.csv"
                 with open(file_path, "a") as file:
                     file.write(data_to_write)
-                set_points.append(int(tstat['t_cool']))
+                set_points.append(int(tstat["t_cool"]))
             time_program(set_points)
             time.sleep(120)
 
