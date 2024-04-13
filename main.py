@@ -9,8 +9,8 @@ import pandas
 
 
 app = Flask(__name__)
-tstat1_url = "http://192.168.1.147/tstat"
-tstat2_url = "http://192.168.1.61/tstat"
+tstat1_url = "http://192.168.1.221/tstat"
+tstat2_url = "http://192.168.1.112/tstat"
 
 @app.route("/")
 def hello():
@@ -61,6 +61,7 @@ def time_program(current_sp):
 def record_fan():
     while True:
         try:
+            tstat = {}
             set_points = []
             for i in range(0, 2):
                 g_url = tstat1_url if i == 0 else tstat2_url
