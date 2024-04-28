@@ -50,7 +50,7 @@ def set_hold():
 def time_program(current_sp):
     programs = [{}, {21: 81, 7: 78}]
     current_hour = datetime.now().hour
-    for t in range(0, len(programs)):
+    for t in range(0, min(len(programs), len(current_sp))):
         for hour, temp in programs[t].items():
             if hour == current_hour and current_sp[t] != temp:
                 tstat_url = tstat1_url if t == 0 else tstat2_url
@@ -78,7 +78,8 @@ def record_fan():
                 file_path = "fan_record.csv"
                 with open(file_path, "a") as file:
                     file.write(data_to_write)
-                set_points.append(int(tstat["t_cool"]))
+                if 't_cool' in tstat:
+                    set_points.append(int(tstat["t_cool"]))
             time_program(set_points)
             time.sleep(120)
 
