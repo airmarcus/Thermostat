@@ -69,7 +69,7 @@ def record_fan():
                     tstat = requests.get(g_url)
                 except:
                     pass
-                if type(tstat) == dict: continue
+                if type(tstat) == dict or tstat == {}: continue
                 tstat = tstat.json()
                 fstate = tstat['fstate']
                 current_datetime = datetime.now()
@@ -84,6 +84,7 @@ def record_fan():
             time.sleep(120)
 
         except Exception as e:
+            print('skipping recording')
             print(traceback.format_exc())
 
 fan_thread = threading.Thread(target=record_fan)
