@@ -75,11 +75,15 @@ def record_fan():
                 current_datetime = datetime.now()
                 record_date = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
                 data_to_write = f"{i+1},{record_date},{fstate}\n"
-                file_path = "fan_record.csv"
-                with open(file_path, "a") as file:
-                    file.write(data_to_write)
+                file = open("fan_record.csv", "a")
+                file.write(data_to_write)
+                file.close()
                 if 't_cool' in tstat:
-                    set_points.append(int(tstat["t_cool"]))
+                    try:
+                        set_points.append(int(tstat["t_cool"]))
+                    except:
+                        print('skipping recording')
+                        print(traceback.format_exc())
             time_program(set_points)
             time.sleep(120)
 
@@ -87,8 +91,10 @@ def record_fan():
             print('skipping recording')
             print(traceback.format_exc())
 
-fan_thread = threading.Thread(target=record_fan)
-fan_thread.start()
+def main():
+    fan_thread = threading.Thread(target=record_fan)
+    fan_thread.start()
+    app.run(host='0.0.0.0', port=5015)
 
 if __name__== '__main__':
-    app.run(host='0.0.0.0', port=5015)
+    main()
